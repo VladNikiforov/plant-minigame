@@ -9,6 +9,7 @@ img {
   image-rendering: smooth;
   image-rendering: high-quality;
   image-rendering: crisp-edges;
+  -webkit-user-drag: none;
 }
 
 #gameContainer {
