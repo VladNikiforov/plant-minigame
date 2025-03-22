@@ -1,5 +1,5 @@
 let count = 0
-let state = 0
+let state = 1
 let isWatering = false
 let cooldown = false
 
@@ -37,7 +37,7 @@ function createRaindrop() {
 
   raindropsContainer.appendChild(raindrop)
 
-  const fallInterval = setInterval(function () {
+  const fallInterval = setInterval(() => {
     const top = parseFloat(raindrop.style.top)
     if (top < window.innerHeight) {
       raindrop.style.top = `${top + 2}px`
@@ -47,7 +47,7 @@ function createRaindrop() {
     }
   }, 20)
 
-  raindrop.addEventListener('click', function () {
+  raindrop.addEventListener('click', () => {
     updateCount(count + 1)
     raindrop.remove()
     clearInterval(fallInterval)
@@ -68,7 +68,7 @@ function updateWateringCanMirror() {
 }
 
 function startWatering() {
-  if (isWatering || cooldown || state >= 6 || count < 1) return
+  if (isWatering || cooldown || state == 7 || count < 1) return
 
   updateCount(count - 1)
   isWatering = true
@@ -84,7 +84,7 @@ function startWatering() {
     plant.src = `assets/plant/${state}.png`
 
     cooldown = true
-    setTimeout(function () {
+    setTimeout(() => {
       cooldown = false
     }, 2000)
   }, 2000)
@@ -104,17 +104,12 @@ function onMouseMove(e, offsetX, offsetY) {
   const plantRect = plant.getBoundingClientRect()
   const canRect = wateringCan.getBoundingClientRect()
 
-  if (
-    canRect.left < plantRect.right &&
-    canRect.right > plantRect.left &&
-    canRect.top < plantRect.bottom &&
-    canRect.bottom > plantRect.top
-  ) {
+  if (canRect.left < plantRect.right && canRect.right > plantRect.left && canRect.top < plantRect.bottom && canRect.bottom > plantRect.top) {
     startWatering()
   }
 }
 
-wateringCan.addEventListener('mousedown', function (e) {
+wateringCan.addEventListener('mousedown', (e) => {
   const offsetX = e.clientX - canPosition.left
   const offsetY = e.clientY - canPosition.top
 
