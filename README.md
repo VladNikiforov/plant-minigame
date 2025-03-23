@@ -1,1 +1,1 @@
-# plant-minigame
+# Plant MiniGame
